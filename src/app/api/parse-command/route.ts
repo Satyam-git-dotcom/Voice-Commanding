@@ -38,6 +38,7 @@ export async function POST(req: Request) {
       3. search: if they want to find, filter, or look for items (e.g. "find organic apples", "show me toothpaste under $5"). Provide the 'searchTerm'.
       
       When adding items, if the user mentions a very common or generic item, you MAY optionally suggest an alternative/substitute in the 'message' field (e.g., "Added milk. Want to try Almond Milk instead?").
+      ALWAYS provide a 'message' field that contains a friendly, conversational response summarizing the action. This message will be spoken aloud to the user. For example: "I've added 2 apples to your list." or "I've removed the milk." or "Here are the results for organic apples."
       
       Return ONLY a valid JSON object with the following structure:
       {
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
           { "name": "string", "quantity": number, "category": "string" }
         ],
         "searchTerm": "string (optional)",
-        "message": "string (optional user facing message, use for substitutes)"
+        "message": "string (conversational spoken response)"
       }
     `;
 
