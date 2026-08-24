@@ -58,10 +58,14 @@ export async function POST(req: Request) {
     const response = await result.response;
     const text = response.text();
     
-    // Clean up potential markdown formatting from Gemini response
-    const jsonString = text.replace(/```json\n?|\n?```/g, '').trim();
+    // Extract JSON block in case Gemini adds markdown or conversational text
+    const match = text.match(/\{[\s\S]*\}/);
+    if (!match) {
+      console.error("No JSON found in response:", text);
+      throw new Error("Failed to parse JSON");
+    }
     
-    const parsedData = JSON.parse(jsonString);
+    const parsedData = JSON.parse(match[0]);
 
     return NextResponse.json(parsedData);
   } catch (error) {

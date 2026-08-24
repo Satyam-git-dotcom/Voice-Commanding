@@ -92,7 +92,7 @@ export default function VoiceInput() {
                 setIsAwake(false);
               }
             }
-          }, 1500);
+          }, 2000);
         }
       };
 
@@ -251,10 +251,10 @@ export default function VoiceInput() {
   return (
     <>
       {/* Desktop Voice Status Indicator (Persistent Bottom) */}
-      <div className="fixed bottom-8 right-8 left-64 z-50 pointer-events-none hidden md:flex justify-end pr-8">
-        <div className={`brutalist-border p-3 flex items-center gap-4 shadow-brutalist pointer-events-auto transition-colors ${
-          isAwake ? 'bg-[#003ec2] text-white' : isListening ? 'bg-[#cc0000]' : 'bg-surface'
-        } ${isListening ? 'w-[600px]' : 'w-auto max-w-2xl'}`}>
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none hidden md:flex justify-center w-full max-w-3xl px-4">
+        <div className={`brutalist-border p-3 flex items-center gap-4 shadow-brutalist pointer-events-auto transition-all duration-300 w-full ${
+          isAwake ? 'bg-[#003ec2] text-white scale-105' : isListening ? 'bg-[#cc0000] scale-100' : 'bg-surface scale-100'
+        }`}>
           <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isListening ? 'bg-surface animate-pulse' : 'bg-primary'}`}></div>
           
           <select 
@@ -323,8 +323,8 @@ export default function VoiceInput() {
 
       {/* Mobile Voice Indicator */}
       <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden flex justify-center pointer-events-none">
-        <div className={`brutalist-border p-3 flex items-center gap-4 shadow-brutalist pointer-events-auto w-full transition-colors ${
-          isAwake ? 'bg-[#003ec2] text-white' : isListening ? 'bg-[#cc0000]' : 'bg-surface'
+        <div className={`brutalist-border p-3 flex items-center gap-4 shadow-brutalist pointer-events-auto w-full transition-all duration-300 ${
+          isAwake ? 'bg-[#003ec2] text-white scale-105' : isListening ? 'bg-[#cc0000] scale-100' : 'bg-surface scale-100'
         }`}>
           <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isListening ? 'bg-surface animate-pulse' : 'bg-primary'}`}></div>
           <span className={`font-label-caps font-bold flex-shrink-0 ${isListening || isAwake ? 'text-surface' : 'text-primary'}`}>
