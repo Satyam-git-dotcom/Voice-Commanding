@@ -5,7 +5,7 @@ import { useShoppingList } from '@/lib/ShoppingContext';
 import { Square, CheckSquare, X } from 'lucide-react';
 
 export default function ShoppingList() {
-  const { items, updateItem } = useShoppingList();
+  const { items, updateItem, removeItem } = useShoppingList();
 
   const groupedItems = useMemo(() => {
     return items.reduce((acc, item) => {
