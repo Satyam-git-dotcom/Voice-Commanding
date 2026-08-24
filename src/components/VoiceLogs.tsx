@@ -2,19 +2,19 @@
 
 import React from 'react';
 import { useShoppingList } from '@/lib/ShoppingContext';
-import { SettingsVoice, Search, Delete, Add, Warning, Calculate } from 'lucide-react';
+import { Mic, Search, Trash2, Plus, AlertTriangle, Calculator } from 'lucide-react';
 
 export default function VoiceLogs() {
   const { commandHistory } = useShoppingList();
 
   const getIntentIcon = (intent: string) => {
     switch (intent) {
-      case 'QUERY_TOTAL': return <Calculate className="w-[14px] h-[14px]" />;
+      case 'QUERY_TOTAL': return <Calculator className="w-[14px] h-[14px]" />;
       case 'SEARCH_ITEM': return <Search className="w-[14px] h-[14px]" />;
-      case 'REMOVE_ITEM': return <Delete className="w-[14px] h-[14px]" />;
-      case 'ADD_ITEM': return <Add className="w-[14px] h-[14px]" />;
-      case 'ERROR_PARSE': return <Warning className="w-[14px] h-[14px]" />;
-      default: return <SettingsVoice className="w-[14px] h-[14px]" />;
+      case 'REMOVE_ITEM': return <Trash2 className="w-[14px] h-[14px]" />;
+      case 'ADD_ITEM': return <Plus className="w-[14px] h-[14px]" />;
+      case 'ERROR_PARSE': return <AlertTriangle className="w-[14px] h-[14px]" />;
+      default: return <Mic className="w-[14px] h-[14px]" />;
     }
   };
 
