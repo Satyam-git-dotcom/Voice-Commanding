@@ -126,8 +126,13 @@ export default function App() {
               <VoiceLogs />
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center pattern-hatching p-8 text-center h-full">
-                <div className="bg-surface p-12 brutalist-border max-w-lg shadow-brutalist">
-                  <h2 className="font-display-lg uppercase tracking-tight text-primary mb-4">{activeTab.replace('_', ' ')}</h2>
+                <div className="bg-surface p-12 brutalist-border max-w-lg shadow-brutalist w-full mx-4">
+                  <h2 
+                    className="font-display-lg uppercase tracking-tight text-primary mb-4 break-words" 
+                    style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', wordBreak: 'break-word', hyphens: 'auto' }}
+                  >
+                    {activeTab.replace('_', ' ')}
+                  </h2>
                   <p className="font-metadata text-secondary uppercase mb-8">
                     MODULE_OFFLINE // THIS COMPONENT IS NOT REQUIRED FOR THE TECHNICAL ASSESSMENT
                   </p>

@@ -66,7 +66,8 @@ export default function VoiceInput() {
             accumulatedTranscriptRef.current = ''; 
             
             if (!isAwakeRef.current) {
-              const wakeWordRegex = /(?:hey|ok|okay)\s*(?:q\s*cart|q\s*kart|cue\s*cart|queue\s*cart|you\s*cart|key\s*cart|q\s*part)\s*(.*)/i;
+              // Enhanced wake word regex to catch various speech-to-text misinterpretations
+              const wakeWordRegex = /(?:hey|ok|okay|hi)\s*(?:q\s*cart|q\s*kart|cue\s*cart|queue\s*cart|you\s*cart|key\s*cart|q\s*part|quick\s*cart|kick\s*art|q\s*card|keep\s*art|k\s*cart)\s*(.*)/i;
               const match = fullCommand.match(wakeWordRegex);
               
               if (match) {
