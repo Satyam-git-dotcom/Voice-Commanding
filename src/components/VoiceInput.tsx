@@ -20,7 +20,7 @@ export default function VoiceInput() {
   const isAwakeRef = useRef(false);
   const isActiveListeningRef = useRef(false);
   
-  const { items, addItem, removeItem, addCommandLog } = useShoppingList();
+  const { items, addItem, removeItem, addCommandLog, clearList } = useShoppingList();
 
   const speakFeedback = (text: string) => {
     if (ttsEnabled && typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -146,6 +146,7 @@ export default function VoiceInput() {
     
     setIsProcessing(true);
     setFeedback('PROCESSING_NLP_INTENT...');
+    let shouldSleep = false;
 
     try {
       const response = await fetch('/api/parse-command', {
@@ -167,17 +168,28 @@ export default function VoiceInput() {
       
       if (data.action === 'add' && data.items) {
         data.items.forEach((item: any) => addItem(item));
-        spokenMessage = spokenMessage || `Added ${data.items.length} items to your list.`;
+        spokenMessage = spokenMessage || `Added ${data.items.length} items to your list. Do you need anything else?`;
         setFeedback(spokenMessage);
         intent = 'ADD_ITEM';
+        isAwakeRef.current = true;
+        setIsAwake(true);
       } else if (data.action === 'remove' && data.items) {
         data.items.forEach((itemToRemove: any) => {
           const item = items.find(i => i.name.toLowerCase() === itemToRemove.name.toLowerCase());
           if (item) removeItem(item.id);
         });
-        spokenMessage = spokenMessage || 'Removed items from your list.';
+        spokenMessage = spokenMessage || 'Removed items from your list. Do you need anything else?';
         setFeedback(spokenMessage);
         intent = 'REMOVE_ITEM';
+        isAwakeRef.current = true;
+        setIsAwake(true);
+      } else if (data.action === 'clear') {
+        clearList();
+        spokenMessage = spokenMessage || 'I have emptied your cart. Do you need anything else?';
+        setFeedback(spokenMessage);
+        intent = 'REMOVE_ITEM';
+        isAwakeRef.current = true;
+        setIsAwake(true);
       } else if (data.action === 'search' && data.searchTerm) {
         spokenMessage = spokenMessage || `Searching for ${data.searchTerm}.`;
         setFeedback(`QUERY: ${data.searchTerm}`);
@@ -185,11 +197,20 @@ export default function VoiceInput() {
         const evt = new CustomEvent('GLOBAL_SEARCH', { detail: data.searchTerm });
         window.dispatchEvent(evt);
         intent = 'SEARCH_ITEM';
+        isAwakeRef.current = true;
+        setIsAwake(true);
+      } else if (data.action === 'stop') {
+        spokenMessage = spokenMessage || 'Okay, let me know if you need anything else!';
+        setFeedback(spokenMessage);
+        intent = 'SYS_INIT';
+        shouldSleep = true;
       } else {
-        spokenMessage = "I'm sorry, I didn't understand that command.";
+        spokenMessage = "I'm sorry, I didn't understand that command. What would you like to do?";
         setFeedback("ERR_INTENT_UNKNOWN");
         intent = 'ERROR_PARSE';
         confidence = 0.102;
+        isAwakeRef.current = true;
+        setIsAwake(true);
       }
 
       speakFeedback(spokenMessage);
@@ -205,6 +226,7 @@ export default function VoiceInput() {
       console.error(error);
       setFeedback("ERR_SYS_FAILURE");
       speakFeedback("System error. Please try again.");
+      shouldSleep = true;
       
       const now = new Date();
       const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}.${now.getMilliseconds().toString().padStart(3, '0')}`;
@@ -217,8 +239,10 @@ export default function VoiceInput() {
       
     } finally {
       setIsProcessing(false);
-      isAwakeRef.current = false;
-      setIsAwake(false);
+      if (shouldSleep) {
+        isAwakeRef.current = false;
+        setIsAwake(false);
+      }
       setTimeout(() => setFeedback(''), 4000);
       setTranscript('');
     }

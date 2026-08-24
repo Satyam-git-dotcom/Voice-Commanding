@@ -34,15 +34,18 @@ export async function POST(req: Request) {
       
       Actions:
       1. add: if they want to add items to their list.
-      2. remove: if they want to remove items. Provide the items array with names to remove.
-      3. search: if they want to find, filter, or look for items (e.g. "find organic apples", "show me toothpaste under $5"). Provide the 'searchTerm'.
+      2. remove: if they want to remove specific items. Provide the items array with names to remove.
+      3. clear: if they want to empty or clear their entire cart/list.
+      4. search: if they want to find, filter, or look for items. Provide the 'searchTerm'.
+      5. stop: if they answer "no", "that's it", "nothing else", "stop", or indicate they do not want to add anything else.
+      6. unknown: if the intent is not recognized.
       
-      When adding items, if the user mentions a very common or generic item, you MAY optionally suggest an alternative/substitute in the 'message' field (e.g., "Added milk. Want to try Almond Milk instead?").
-      ALWAYS provide a 'message' field that contains a friendly, conversational response summarizing the action. This message will be spoken aloud to the user. For example: "I've added 2 apples to your list." or "I've removed the milk." or "Here are the results for organic apples."
+      When adding/removing/searching, ALWAYS provide a 'message' field that contains a friendly, conversational response summarizing the action, AND ALWAYS end your message by asking if they want to add or do anything else (e.g., "I've added 2 apples. Do you need anything else?"). 
+      If the action is 'stop', your message should be a friendly sign-off (e.g., "Okay, let me know if you need anything else!").
       
       Return ONLY a valid JSON object with the following structure:
       {
-        "action": "add" | "remove" | "search" | "unknown",
+        "action": "add" | "remove" | "clear" | "search" | "stop" | "unknown",
         "items": [
           { "name": "string", "quantity": number, "category": "string" }
         ],

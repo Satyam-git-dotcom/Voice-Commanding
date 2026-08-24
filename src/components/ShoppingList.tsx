@@ -5,7 +5,7 @@ import { useShoppingList } from '@/lib/ShoppingContext';
 import { Square, CheckSquare, X } from 'lucide-react';
 
 export default function ShoppingList() {
-  const { items, updateItem, removeItem } = useShoppingList();
+  const { items, updateItem, removeItem, clearList } = useShoppingList();
 
   const groupedItems = useMemo(() => {
     return items.reduce((acc, item) => {
@@ -28,6 +28,14 @@ export default function ShoppingList() {
 
   return (
     <div className="w-full flex flex-col gap-6">
+      <div className="flex justify-end mb-4">
+        <button 
+          onClick={clearList}
+          className="brutalist-button px-4 py-2 font-label-caps text-error border-error hover:bg-error hover:text-surface transition-colors"
+        >
+          EMPTY CART
+        </button>
+      </div>
       {categories.map((category) => (
         <div key={category}>
           <div className="inline-block brutalist-border px-2 py-1 font-metadata mb-2 bg-surface uppercase">
