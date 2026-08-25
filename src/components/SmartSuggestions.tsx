@@ -55,12 +55,11 @@ export default function SmartSuggestions() {
         ) : suggestions.length > 0 ? (
           <div className="flex flex-col gap-4">
             {suggestions.map((suggestion, idx) => {
-              const keyword = encodeURIComponent(suggestion.name.toUpperCase());
               return (
                 <div key={idx} className="flex gap-4 p-4 border border-on-surface bg-surface brutalist-border hover:-translate-y-1 transition-transform group">
                   <div 
                     className="w-12 h-12 border-r border-on-surface bg-surface-dim bg-cover bg-center sepia-hover flex-shrink-0"
-                    style={{ backgroundImage: `url('https://placehold.co/100x100/e5e2e1/1c1b1b?text=${keyword}')` }}
+                    style={{ backgroundImage: `url('https://loremflickr.com/100/100/${encodeURIComponent(suggestion.name.toLowerCase())},food/all')` }}
                   ></div>
                   <div className="relative z-10">
                     <p className="font-metadata text-on-surface mb-3 uppercase">

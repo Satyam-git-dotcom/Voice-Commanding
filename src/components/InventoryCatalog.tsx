@@ -79,7 +79,7 @@ export default function InventoryCatalog() {
                 <div key={item.id} className="brutalist-border bg-surface flex flex-col group hover:-translate-y-1 transition-transform duration-200">
                   <div 
                     className="w-full h-48 border-b border-on-surface bg-surface-dim bg-cover bg-center sepia-hover"
-                    style={{ backgroundImage: `url('https://placehold.co/400x400/e5e2e1/1c1b1b?text=${keyword}')` }}
+                    style={{ backgroundImage: `url('https://loremflickr.com/400/400/${encodeURIComponent(item.name.toLowerCase())},food/all')` }}
                   />
                   <div className="p-4 flex flex-col flex-1">
                     <span className="font-metadata text-secondary mb-1 uppercase">[{item.category}]</span>

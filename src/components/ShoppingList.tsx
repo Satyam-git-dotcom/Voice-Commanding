@@ -56,7 +56,7 @@ export default function ShoppingList() {
                   <div className="flex items-center gap-3">
                     <div 
                       className="w-16 h-16 border-r border-on-surface bg-surface-dim bg-cover bg-center sepia-hover hidden sm:block"
-                      style={{ backgroundImage: `url('https://placehold.co/160x160/e5e2e1/1c1b1b?text=${keyword}')` }}
+                      style={{ backgroundImage: `url('https://loremflickr.com/160/160/${encodeURIComponent(item.name.toLowerCase())},food/all')` }}
                     />
                     <span className={`uppercase ${item.purchased ? 'line-through' : ''}`}>
                       Fig. {idx + 1}: {item.quantity}x {item.name}
