@@ -79,7 +79,7 @@ export default function InventoryCatalog() {
                 <div key={item.id} className="brutalist-border bg-surface flex flex-col group hover:-translate-y-1 transition-transform duration-200">
                   <div 
                     className="w-full h-48 border-b border-on-surface bg-surface-dim bg-cover bg-center sepia-hover"
-                    style={{ backgroundImage: `url('https://image.pollinations.ai/prompt/fresh%20${keyword}%20grocery%20food?width=400&height=400&nologo=true')` }}
+                    style={{ backgroundImage: `url('https://placehold.co/400x400/e5e2e1/1c1b1b?text=${keyword}')` }}
                   />
                   <div className="p-4 flex flex-col flex-1">
                     <span className="font-metadata text-secondary mb-1 uppercase">[{item.category}]</span>

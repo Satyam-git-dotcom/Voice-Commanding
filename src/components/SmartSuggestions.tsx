@@ -59,8 +59,8 @@ export default function SmartSuggestions() {
               return (
                 <div key={idx} className="flex gap-4 p-4 border border-on-surface bg-surface brutalist-border hover:-translate-y-1 transition-transform group">
                   <div 
-                    className="w-16 h-16 bg-surface-dim border-r border-b border-on-surface bg-cover bg-center sepia-hover flex-shrink-0"
-                    style={{ backgroundImage: `url('https://image.pollinations.ai/prompt/fresh%20${keyword}%20grocery%20food?width=100&height=100&nologo=true')` }}
+                    className="w-12 h-12 border-r border-on-surface bg-surface-dim bg-cover bg-center sepia-hover flex-shrink-0"
+                    style={{ backgroundImage: `url('https://placehold.co/100x100/e5e2e1/1c1b1b?text=${keyword}')` }}
                   ></div>
                   <div className="relative z-10">
                     <p className="font-metadata text-on-surface mb-3 uppercase">
@@ -94,13 +94,13 @@ export default function SmartSuggestions() {
       <div className="p-4 flex-1 bg-surface">
         <h3 className="font-label-caps font-bold mb-4">SEASONAL_INDEX</h3>
         <div className="flex flex-col gap-4">
-          <div className="brutalist-border p-2 group cursor-pointer" onClick={() => addItem({ name: "Pomegranates", quantity: 1, category: "Produce" })}>
-            <div className="w-full h-32 bg-cover bg-center sepia-hover mb-2 brutalist-border" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZsYVdGkn94j_Dx1860AH_nWpPQ2lkaFHFAqQrAzM6UZG2o9aV8ln3NMd2Hgxz0gdD5fGXsbzaPNJJhwZAoUOgdjC6dQhp9YKH6rlPUw36p5H-bDw05dsCRcmZ1gVaf1faEUjaT4KmyKChTOhKoxrVTCgivy5xRgvmloF-7PiFIx79dS6leUigJFqIHXNHUpqA-JP7voCO1CheQoO_yPS9_fF6RcL9KEBotD23v45W5Pra0xSDQM8u')" }}></div>
-            <p className="font-metadata uppercase">REF: POMEGRANATES</p>
+          <div className="brutalist-border p-4 bg-surface group cursor-pointer hover:bg-surface-dim transition-colors relative overflow-hidden">
+            <div className="w-full h-32 bg-cover bg-center sepia-hover mb-2 brutalist-border" style={{ backgroundImage: "url('https://placehold.co/400x200/e5e2e1/1c1b1b?text=FRESH+PRODUCE+SALE')" }}></div>
+            <h4 className="font-label-caps font-bold">FRESH PRODUCE SALE</h4>
           </div>
-          <div className="brutalist-border p-2 group cursor-pointer" onClick={() => addItem({ name: "Winter Squash", quantity: 1, category: "Produce" })}>
-            <div className="w-full h-32 bg-cover bg-center sepia-hover mb-2 brutalist-border" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIJ1Nm2E7cJZGiVm6mrYDtHjXKvsR5ej7wfmIdaO65xcQ_TBZfJaWHkCK0ZQvDUtxfTcPKKb6ACWNPNeMUt33Bz8cztmZQIMydSj8nLno4OKDZATHPNiLI5FeZjI2Ah9fNduCmY7krpDIIt1mpscL6MfEa19Y9LRAXE6qGqzDd2SQIAdpTAPlAII2mEFtcZLJ4USZiLROn3YunnimbInHhP6qivDg9MQ2sEYUoYfxS7WRY8u7JSKBY')" }}></div>
-            <p className="font-metadata uppercase">REF: WINTER SQUASH</p>
+          <div className="brutalist-border p-4 bg-surface group cursor-pointer hover:bg-surface-dim transition-colors relative overflow-hidden">
+            <div className="w-full h-32 bg-cover bg-center sepia-hover mb-2 brutalist-border" style={{ backgroundImage: "url('https://placehold.co/400x200/e5e2e1/1c1b1b?text=DAIRY+BOGO')" }}></div>
+            <h4 className="font-label-caps font-bold">BUY 1 GET 1 DAIRY</h4>
           </div>
         </div>
       </div>

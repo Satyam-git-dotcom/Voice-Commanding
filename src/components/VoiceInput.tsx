@@ -133,10 +133,13 @@ export default function VoiceInput() {
       recognitionRef.current?.stop();
     } else {
       setTranscript('');
-      setFeedback('');
+      setFeedback('AWAITING_COMMAND...');
       isActiveListeningRef.current = true;
       setIsActiveListening(true);
       setIsListening(true);
+      isAwakeRef.current = true;
+      setIsAwake(true);
+      speakFeedback("How can I help?");
       recognitionRef.current?.start();
     }
   };
