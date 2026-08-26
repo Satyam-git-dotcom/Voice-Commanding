@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { useShoppingList } from '@/lib/ShoppingContext';
+import { catalogData } from '@/lib/catalogData';
 import { Square, CheckSquare, X } from 'lucide-react';
 
 export default function ShoppingList() {
@@ -47,16 +48,14 @@ export default function ShoppingList() {
               const keyword = encodeURIComponent(item.name.split(' ')[0].toLowerCase());
               
               return (
-                <li
-                  key={item.id}
-                  className={`flex justify-between items-center p-2 brutalist-border font-metadata transition-colors bg-surface ${
-                    item.purchased ? 'opacity-50' : ''
-                  }`}
+                <div 
+                  key={item.id} 
+                  className={`flex items-center justify-between p-4 border border-on-surface bg-surface brutalist-border hover:-translate-y-1 transition-all group ${item.purchased ? 'opacity-50 grayscale' : ''}`}
                 >
                   <div className="flex items-center gap-3">
                     <div 
                       className="w-16 h-16 border-r border-on-surface bg-surface-dim bg-cover bg-center sepia-hover hidden sm:block"
-                      style={{ backgroundImage: `url('https://loremflickr.com/160/160/${encodeURIComponent(item.name.toLowerCase())},food/all')` }}
+                      style={{ backgroundImage: `url('${catalogData.find(c => c.name.toLowerCase() === item.name.toLowerCase())?.imageUrl || `https://placehold.co/160x160/e5e2e1/1c1b1b?text=${keyword}`}')` }}
                     />
                     <span className={`uppercase ${item.purchased ? 'line-through' : ''}`}>
                       Fig. {idx + 1}: {item.quantity}x {item.name}
@@ -80,7 +79,7 @@ export default function ShoppingList() {
                       {item.purchased ? <CheckSquare className="w-6 h-6" /> : <Square className="w-6 h-6" />}
                     </button>
                   </div>
-                </li>
+                </div>
               );
             })}
           </ul>
